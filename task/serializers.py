@@ -35,8 +35,6 @@ class TaskCreateSerializer(serializers.ModelSerializer):
 class TaskUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        # fields = ['title', 'description', 'completed']
-        # exclude = ('completed_at',)
         fields = '__all__'
 
     def update(self, instance, validated_data):

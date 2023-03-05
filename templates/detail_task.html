@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todos</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-8 offset-md-2">
+
+                <div class="card">
+                    <div class="card-header shadow-sm bg-white">
+                        <a href="{% url 'all_tasks' %}"><h1 class="display-5 text-info"><i class="fas fa-check-double"></i> Todos</h1></a>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'update_task' task_detail.id %}" method="post" autocomplete="off">
+                        {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-lg-12">
+                                    <input type="text" class="form-control" name="title" placeholder="Change the task" value="{{ form.title.value }}">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <input type="text" class="form-control" name="description" placeholder="Change a description" value="{{ form.description.value }}">
+                                </div>
+                            </div>
+                            <input type="submit" value="Save" class="btn btn-primary">
+                        </form>
+                        <br>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="title_size text-primary">{{task_detail.title}}</span>
+                                <br><span>{{ task_detail.description }}</span>
+                                <br> <span class="created_at">{{ task_detail.created_at }}</span>
+                                <form action="{% url 'delete_task' task_detail.id %}" method="post" class="float-right d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">
+                                    <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                </button>
+                            </form>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

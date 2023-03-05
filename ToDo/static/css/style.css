@@ -1,0 +1,9 @@
+.title_size {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.created_at {
+    font-size: 13px;
+    opacity: 0.7;
+}
